@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include model_generator *.css
+recursive-include model_generator *.csv
+recursive-include model_generator *.html
+recursive-include model_generator *.ico
+recursive-include model_generator *.js
+recursive-include model_generator *.json
+recursive-include model_generator *.md
+recursive-include model_generator *.png
+recursive-include model_generator *.py
+recursive-include model_generator *.svg
+recursive-include model_generator *.txt
+recursive-exclude model_generator *.pyc
