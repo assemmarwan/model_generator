@@ -1,0 +1,64 @@
+{
+ "creation": "2019-12-27 00:14:49.324624",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_doctype",
+  "column_break_2",
+  "link_3",
+  "reference_doctype_section",
+  "fields_multicheck"
+ ],
+ "fields": [
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "DocType",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "link_3",
+   "fieldtype": "Link",
+   "options": "Language Model Configuration",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_doctype_section",
+   "fieldtype": "Section Break",
+   "label": "Reference DocType"
+  },
+  {
+   "fieldname": "fields_multicheck",
+   "fieldtype": "HTML"
+  }
+ ],
+ "hide_toolbar": 1,
+ "issingle": 1,
+ "modified": "2019-12-27 01:40:49.665750",
+ "modified_by": "Administrator",
+ "module": "Model Generator",
+ "name": "Model Generator",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
