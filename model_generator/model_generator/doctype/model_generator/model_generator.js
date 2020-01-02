@@ -42,9 +42,8 @@ const set_field_options = (frm) => {
     // Add 'Select All' and 'Unselect All' button
     make_multiselect_buttons(parent_wrapper);
     frm.fields_multicheck = {};
-    related_doctypes.forEach(dt => {
-        frm.fields_multicheck[dt] = add_doctype_field_multicheck_control(dt, parent_wrapper);
-    });
+    related_doctypes.forEach(dt =>
+        frm.fields_multicheck[dt.doctype] = add_doctype_field_multicheck_control(dt.doctype, parent_wrapper, dt.fieldname));
 
     frm.refresh();
 };
@@ -81,13 +80,14 @@ const make_multiselect_buttons = parent_wrapper => {
 
 };
 
-const get_doctypes = parentdt => {
-    return [parentdt].concat(
-        frappe.meta.get_table_fields(parentdt).map(df => df.options)
-    );
-};
+const get_doctypes = parentdt => [{doctype: parentdt}].concat(
+    frappe.meta.get_table_fields(parentdt).map((df) => {
+        return {
+            doctype: df.options, fieldname: df.fieldname
+        };
+    }));
 
-const add_doctype_field_multicheck_control = (doctype, parent_wrapper) => {
+const add_doctype_field_multicheck_control = (doctype, parent_wrapper, field = '') => {
     const fields = get_fields(doctype);
 
     console.log(fields);
@@ -96,17 +96,16 @@ const add_doctype_field_multicheck_control = (doctype, parent_wrapper) => {
         .map(df => {
             return {
                 label: `${df.label} (${df.fieldtype})`,
-                value: `${df.fieldname}:${df.fieldtype}` + (df.fieldtype === 'Link' ? `:${df.options}` : ``),
+                value: `${df.fieldname}:${df.fieldtype}`,
                 danger: df.reqd,
                 checked: 1
             };
         });
-
     const multicheck_control = frappe.ui.form.make_control({
         parent: parent_wrapper,
         df: {
             "label": doctype,
-            "fieldname": doctype + '_fields',
+            "fieldname": field,
             "fieldtype": "MultiCheck",
             "options": options,
             "columns": 3,
@@ -122,9 +121,16 @@ const generate_doc = frm => {
     let columns = {};
     Object.keys(frm.fields_multicheck).forEach(dt => {
         const options = frm.fields_multicheck[dt].get_checked_options();
-        columns[dt] = options;
+
+        let key;
+        if (frm.fields_multicheck[dt].df.fieldname === '')
+            key = dt;
+        else
+            key = dt + ':' + frm.fields_multicheck[dt].df.fieldname;
+        columns[key] = options;
     });
     console.log(columns);
+    // TODO: Preprocess the result above and call the python function to generate the file.
 };
 
 
