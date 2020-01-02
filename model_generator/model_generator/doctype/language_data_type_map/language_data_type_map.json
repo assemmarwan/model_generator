@@ -1,0 +1,39 @@
+{
+ "creation": "2020-01-02 12:17:32.135636",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "field_type",
+  "data_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "data_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Data Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "field_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Field Type",
+   "options": "Data\nSelect\nCheck\nLink\nDynamic Link\nInt\nFloat\nCurrency\nAttach Image\nAttach\nCode\nDate\nDatetime\nHTML Editor\nImage\nLong Text\nMarkdown Editor\nPassword\nPercent\nRating\nSmall Text\nText\nText Editor\nTime",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-01-02 22:43:54.851116",
+ "modified_by": "Administrator",
+ "module": "Model Generator",
+ "name": "Language Data Type Map",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,4 +1,5 @@
 {
+ "allow_rename": 1,
  "autoname": "field:title",
  "creation": "2019-12-21 00:46:36.398570",
  "doctype": "DocType",
@@ -6,7 +7,9 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
-  "short_name"
+  "file_extension",
+  "default_type",
+  "data_type_map"
  ],
  "fields": [
   {
@@ -18,12 +21,27 @@
    "unique": 1
   },
   {
-   "fieldname": "short_name",
+   "fieldname": "data_type_map",
+   "fieldtype": "Table",
+   "label": "Data Type Map",
+   "options": "Language Data Type Map",
+   "reqd": 1
+  },
+  {
+   "description": "The default type in case the field type is not defined in the map table.",
+   "fieldname": "default_type",
    "fieldtype": "Data",
-   "label": "Short Name"
+   "label": "Default Type",
+   "reqd": 1
+  },
+  {
+   "description": "The file extension of the language. Will be used when downloading the file.",
+   "fieldname": "file_extension",
+   "fieldtype": "Data",
+   "label": "File Extension"
   }
  ],
- "modified": "2019-12-21 00:46:36.398570",
+ "modified": "2020-01-02 22:43:14.539691",
  "modified_by": "Administrator",
  "module": "Model Generator",
  "name": "Language Model Configuration",
