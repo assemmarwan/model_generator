@@ -11,6 +11,15 @@ app_color = "grey"
 app_email = "assem905@gmail.com"
 app_license = "MIT"
 
+
+
+fixtures = [
+	{
+		"dt": "Language Model Configuration"
+	}
+]
+
+
 # Includes in <head>
 # ------------------
 

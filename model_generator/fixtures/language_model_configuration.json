@@ -1,0 +1,114 @@
+[
+ {
+  "data_type_map": [
+   {
+    "data_type": "String",
+    "field_type": "Data",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "String",
+    "field_type": "Select",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "int",
+    "field_type": "Check",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "String",
+    "field_type": "Link",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "String",
+    "field_type": "Dynamic Link",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "int",
+    "field_type": "Int",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "double",
+    "field_type": "Float",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "num",
+    "field_type": "Currency",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "String",
+    "field_type": "Attach Image",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "String",
+    "field_type": "Attach",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "String",
+    "field_type": "Code",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "DateTime",
+    "field_type": "Date",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "String",
+    "field_type": "Small Text",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "num",
+    "field_type": "Rating",
+    "parent": "Dart",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   }
+  ],
+  "default_type": "String",
+  "docstatus": 0,
+  "doctype": "Language Model Configuration",
+  "file_extension": ".dart",
+  "modified": "2020-01-02 22:46:52.499987",
+  "name": "Dart",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "title": "Dart"
+ }
+]
