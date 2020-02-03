@@ -7,7 +7,7 @@ def get_data():
 		{
 			"module_name": "Model Generator",
 			"color": "grey",
-			"icon": "octicon octicon-file-directory",
+			"icon": "octicon octicon-settings",
 			"type": "module",
 			"label": _("Model Generator")
 		}
