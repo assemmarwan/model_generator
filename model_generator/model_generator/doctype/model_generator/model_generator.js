@@ -119,18 +119,143 @@ const add_doctype_field_multicheck_control = (doctype, parent_wrapper, field = '
 
 const generate_doc = frm => {
     let columns = {};
+    let doctype;
     Object.keys(frm.fields_multicheck).forEach(dt => {
         const options = frm.fields_multicheck[dt].get_checked_options();
-
         let key;
-        if (frm.fields_multicheck[dt].df.fieldname === '')
+        // Target doctype
+        if (frm.fields_multicheck[dt].df.fieldname === '') {
             key = dt;
-        else
+            doctype = key;
+            columns[doctype] = options.map(option => parse_field(option));
+        }
+        // Table doctype
+        else {
             key = dt + ':' + frm.fields_multicheck[dt].df.fieldname;
-        columns[key] = options;
+            let temp = columns[doctype];
+            temp.push({
+                doctype: dt,
+                fieldname: frm.fields_multicheck[dt].df.fieldname,
+                fields: options.map(option => parse_field(option))
+            });
+            columns[doctype] = temp;
+        }
     });
     console.log(columns);
-    // TODO: Preprocess the result above and call the python function to generate the file.
+};
+
+/**
+ * Converts the columns selected into a predefined schema.
+ * This is to standarize the schema if the API will be used to generate models.
+ * Example:
+ *
+ * {
+  "User": [
+    {
+      "fieldname": "location",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "bio",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "last_ip",
+      "fieldtype": "Read Only"
+    },
+    {
+      "fieldname": "last_active",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "api_key",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "api_secret",
+      "fieldtype": "Password"
+    },
+    {
+      "doctype": "Has Role",
+      "fieldname": "roles",
+      "fields": [
+        {
+          "fieldname": "role",
+          "fieldtype": "Link"
+        }
+      ]
+    },
+    {
+      "doctype": "User Email",
+      "fieldname": "user_emails",
+      "fields": [
+        {
+          "fieldname": "email_account",
+          "fieldtype": "Link"
+        },
+        {
+          "fieldname": "email_id",
+          "fieldtype": "Data"
+        },
+        {
+          "fieldname": "awaiting_password",
+          "fieldtype": "Check"
+        },
+        {
+          "fieldname": "enable_outgoing",
+          "fieldtype": "Check"
+        }
+      ]
+    },
+    {
+      "doctype": "Block Module",
+      "fieldname": "block_modules",
+      "fields": [
+        {
+          "fieldname": "module",
+          "fieldtype": "Data"
+        }
+      ]
+    },
+    {
+      "doctype": "DefaultValue",
+      "fieldname": "defaults",
+      "fields": [
+        {
+          "fieldname": "defkey",
+          "fieldtype": "Data"
+        },
+        {
+          "fieldname": "defvalue",
+          "fieldtype": "Text"
+        }
+      ]
+    },
+    {
+      "doctype": "User Social Login",
+      "fieldname": "social_logins",
+      "fields": [
+        {
+          "fieldname": "provider",
+          "fieldtype": "Data"
+        },
+        {
+          "fieldname": "username",
+          "fieldtype": "Data"
+        },
+        {
+          "fieldname": "userid",
+          "fieldtype": "Data"
+        }
+      ]
+    }
+  ]
+}
+ *
+ */
+const parse_field = (field) => {
+    let splitField = field.split(':');
+    return {fieldname: splitField[0], fieldtype: splitField[1]};
 };
 
 
