@@ -259,5 +259,5 @@ const parse_field = (field) => {
 };
 
 
-const filter_fields = df => frappe.model.is_value_type(df) && !df.hidden;
+const filter_fields = df => frappe.model.is_value_type(df);
 const get_fields = dt => frappe.meta.get_docfields(dt).filter(filter_fields);
