@@ -5,7 +5,10 @@ frappe.ui.form.on('Model Generator', {
     refresh: frm => {
         frm.disable_save();
         frm.page.set_primary_action('Generate', () => {
-            generate_doc(frm);
+            if (frm.doc.language_config && frm.doc.language_config !== '')
+                generate_doc(frm);
+            else
+                frappe.msgprint("Please fill the required fields and make sure the fields are selected");
         });
     },
     onload: frm => {
