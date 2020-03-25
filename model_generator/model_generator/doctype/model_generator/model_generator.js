@@ -8,7 +8,7 @@ frappe.ui.form.on('Model Generator', {
             if (frm.doc.language_config && frm.doc.language_config !== '')
                 generate_doc(frm);
             else
-                frappe.msgprint("Please fill the required fields and make sure the fields are selected");
+                frappe.throw("Please fill the required fields and make sure the fields are selected");
         });
     },
     onload: frm => {
@@ -145,6 +145,8 @@ const generate_doc = frm => {
         }
     });
     console.log(columns);
+    frappe.call('model_generator.api.generate_model', {fields: columns, lang_config: frm.doc.language_config})
+        .then(result => frappe.msgprint(result, 'Successful Generation'));
 };
 
 /**
