@@ -34,7 +34,7 @@ def generate_model(fields, lang_config) -> str:
   final_string += fields_parsed
   final_string += end_file()
 
-  return final_string + final_string + final_string
+  return final_string
 
 
 def begin_file(doctype: str, header: str) -> str:
