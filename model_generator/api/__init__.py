@@ -1,0 +1,1 @@
+from model_generator.api.model_generator import generate_model
