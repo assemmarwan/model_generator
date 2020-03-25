@@ -25,31 +25,35 @@ def generate_model(fields, lang_config) -> str:
   # TODO: Handle child doctypes
   child_doctypes: list = [child_doctype for child_doctype in fields_dict[doctype] if child_doctype.get('doctype')]
 
-  final_string: str = begin_file(doctype, 'class {{doctype}} {\n\n')
+  final_string: str = begin_file(doctype, language_config.get('signature_start'))
 
   fields_parsed: str = ''
   for field in fields:
     fields_parsed += parse_field_with_type(field, language_config)
 
   final_string += fields_parsed
-  final_string += end_file()
+  final_string += language_config.get('signature_end')
 
   return final_string
 
 
 def begin_file(doctype: str, header: str) -> str:
-  return header.replace('{{doctype}}', doctype)
-
-
-def end_file() -> str:
-  return '\n}'
+  return header.replace('{{doctype}}', doctype.replace(' ', ''))
 
 
 def parse_field_with_type(field: dict, lang_config: dict) -> str:
   _fieldtype = field.get('fieldtype')
   fieldtype = get_type_from_lang_config(_fieldtype, lang_config)
   fieldname = field.get('fieldname')
-  return fieldtype + ' ' + fieldname + ';\n'
+
+  if lang_config.get('to_camel_case'):
+    decorator: str = lang_config.get('decorator')
+    field_parsed = decorator.replace('{{fieldname}}', fieldname) + '\n'
+    field_parsed += fieldtype + ' ' + snake_to_camel(fieldname) + ';\n'
+  else:
+    field_parsed = fieldtype + ' ' + fieldname + ';\n'
+
+  return field_parsed
 
 
 def get_type_from_lang_config(field_type: str, lang_config: dict) -> str:
@@ -64,6 +68,6 @@ def get_type_from_lang_config(field_type: str, lang_config: dict) -> str:
   return _fieldtype
 
 
-# TODO:
 def snake_to_camel(snake_string: str) -> str:
-  pass
+  components = snake_string.split('_')
+  return components[0] + ''.join(x.title() for x in components[1:])

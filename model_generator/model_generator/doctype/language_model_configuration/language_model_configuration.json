@@ -7,8 +7,13 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
-  "file_extension",
   "default_type",
+  "to_camel_case",
+  "decorator",
+  "column_break_5",
+  "signature_start",
+  "signature_end",
+  "section_break_6",
   "data_type_map"
  ],
  "fields": [
@@ -24,8 +29,7 @@
    "fieldname": "data_type_map",
    "fieldtype": "Table",
    "label": "Data Type Map",
-   "options": "Language Data Type Map",
-   "reqd": 1
+   "options": "Language Data Type Map"
   },
   {
    "description": "The default type in case the field type is not defined in the map table.",
@@ -35,13 +39,41 @@
    "reqd": 1
   },
   {
-   "description": "The file extension of the language. Will be used when downloading the file.",
-   "fieldname": "file_extension",
-   "fieldtype": "Data",
-   "label": "File Extension"
+   "default": "0",
+   "fieldname": "to_camel_case",
+   "fieldtype": "Check",
+   "label": "To Camel Case"
+  },
+  {
+   "depends_on": "to_camel_case",
+   "fieldname": "decorator",
+   "fieldtype": "Code",
+   "label": "Decorator"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "The beginning of code. For example in Dart: class User {\n",
+   "fieldname": "signature_start",
+   "fieldtype": "Code",
+   "label": "Signature Start",
+   "reqd": 1
+  },
+  {
+   "description": "The end of the code. For example in Dart: }\n",
+   "fieldname": "signature_end",
+   "fieldtype": "Code",
+   "label": "Signature End",
+   "reqd": 1
   }
  ],
- "modified": "2020-01-02 22:43:14.539691",
+ "modified": "2020-03-26 02:09:33.596950",
  "modified_by": "Administrator",
  "module": "Model Generator",
  "name": "Language Model Configuration",

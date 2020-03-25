@@ -100,15 +100,18 @@
     "parenttype": "Language Model Configuration"
    }
   ],
+  "decorator": "@JsonKey(name:\"{{fieldname}}\")",
   "default_type": "String",
   "docstatus": 0,
   "doctype": "Language Model Configuration",
-  "file_extension": ".dart",
-  "modified": "2020-01-02 22:46:52.499987",
+  "modified": "2020-03-26 03:21:37.267180",
   "name": "Dart",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "title": "Dart"
+  "signature_end": "}",
+  "signature_start": "class {{doctype}} {",
+  "title": "Dart",
+  "to_camel_case": 1
  }
 ]
