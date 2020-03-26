@@ -5,6 +5,11 @@ import frappe
 
 @frappe.whitelist(allow_guest=True)
 def generate_model(fields, lang_config) -> str:
+  if frappe.model.db_exists('Language Model Configuration', lang_config):
+    language_config = frappe.get_doc('Language Model Configuration', lang_config).as_dict()
+  else:
+    frappe.throw('Language Model Configuration: {0} does not exist'.format(lang_config))
+
   if isinstance(fields, str):
     fields_dict: dict = json.loads(fields)
   else:
@@ -15,16 +20,18 @@ def generate_model(fields, lang_config) -> str:
   if not doctype or doctype is '':
     frappe.throw('Doctype is not specified')
 
-  if frappe.model.db_exists('Language Model Configuration', lang_config):
-    language_config = frappe.get_doc('Language Model Configuration', lang_config).as_dict()
-  else:
-    frappe.throw('Language Model Configuration: {0} does not exist'.format(lang_config))
+  fields: list = [field for field in fields_dict[doctype]]
 
-  fields: list = [field for field in fields_dict[doctype] if field.get('doctype') is None]
-
-  # TODO: Handle child doctypes
   child_doctypes: list = [child_doctype for child_doctype in fields_dict[doctype] if child_doctype.get('doctype')]
 
+  model = create_model(doctype, fields, language_config)
+  for child_doctype in child_doctypes:
+    model += create_model(child_doctype.get('doctype'), child_doctype.get('fields'), language_config)
+
+  return model
+
+
+def create_model(doctype: str, fields: list, language_config: dict) -> str:
   final_string: str = begin_file(doctype, language_config.get('signature_start'))
 
   fields_parsed: str = ''
@@ -33,7 +40,6 @@ def generate_model(fields, lang_config) -> str:
 
   final_string += fields_parsed
   final_string += language_config.get('signature_end')
-
   return final_string
 
 
@@ -45,13 +51,23 @@ def parse_field_with_type(field: dict, lang_config: dict) -> str:
   _fieldtype = field.get('fieldtype')
   fieldtype = get_type_from_lang_config(_fieldtype, lang_config)
   fieldname = field.get('fieldname')
+  child_doc_type: str = lang_config.get('child_doc_type')
 
+  print(child_doc_type)
   if lang_config.get('to_camel_case'):
     decorator: str = lang_config.get('decorator')
     field_parsed = decorator.replace('{{fieldname}}', fieldname) + '\n'
-    field_parsed += fieldtype + ' ' + snake_to_camel(fieldname) + ';\n'
+    if field.get('doctype') is None:
+      field_parsed += fieldtype + ' ' + snake_to_camel(fieldname) + ';\n'
+    else:
+      field_parsed += child_doc_type.replace('{{child_doctype}}',
+                                             field.get('doctype').replace(' ', '')) + ' ' + snake_to_camel(
+          fieldname) + ';\n'
   else:
-    field_parsed = fieldtype + ' ' + fieldname + ';\n'
+    if lang_config.get('to_camel_case'):
+      field_parsed = child_doc_type.replace('{{child_doctype}}', field.get('doctype')) + ' ' + fieldname + ';\n'
+    else:
+      field_parsed = fieldtype + ' ' + fieldname + ';\n'
 
   return field_parsed
 

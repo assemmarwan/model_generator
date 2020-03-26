@@ -10,6 +10,7 @@
   "default_type",
   "to_camel_case",
   "decorator",
+  "child_doc_type",
   "column_break_5",
   "signature_start",
   "signature_end",
@@ -71,9 +72,15 @@
    "fieldtype": "Code",
    "label": "Signature End",
    "reqd": 1
+  },
+  {
+   "fieldname": "child_doc_type",
+   "fieldtype": "Select",
+   "label": "Child Doc Type",
+   "options": "List&lt;{{child_doctype}}&gt;\nArray&lt;{{child_doctype}}&gt;"
   }
  ],
- "modified": "2020-03-26 02:09:33.596950",
+ "modified": "2020-03-26 04:04:26.773294",
  "modified_by": "Administrator",
  "module": "Model Generator",
  "name": "Language Model Configuration",

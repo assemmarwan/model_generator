@@ -1,5 +1,6 @@
 [
  {
+  "child_doc_type": "List&lt;{{child_doctype}}&gt;",
   "data_type_map": [
    {
     "data_type": "String",
@@ -104,7 +105,7 @@
   "default_type": "String",
   "docstatus": 0,
   "doctype": "Language Model Configuration",
-  "modified": "2020-03-26 03:21:37.267180",
+  "modified": "2020-03-26 04:10:57.344692",
   "name": "Dart",
   "parent": null,
   "parentfield": null,
