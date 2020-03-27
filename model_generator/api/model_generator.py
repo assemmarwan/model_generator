@@ -53,7 +53,6 @@ def parse_field_with_type(field: dict, lang_config: dict) -> str:
   fieldname = field.get('fieldname')
   child_doc_type: str = lang_config.get('child_doc_type')
 
-  print(child_doc_type)
   if lang_config.get('to_camel_case'):
     decorator: str = lang_config.get('decorator')
     field_parsed = decorator.replace('{{fieldname}}', fieldname) + '\n'
@@ -64,10 +63,11 @@ def parse_field_with_type(field: dict, lang_config: dict) -> str:
                                              field.get('doctype').replace(' ', '')) + ' ' + snake_to_camel(
           fieldname) + ';\n'
   else:
-    if lang_config.get('to_camel_case'):
-      field_parsed = child_doc_type.replace('{{child_doctype}}', field.get('doctype')) + ' ' + fieldname + ';\n'
-    else:
+    if field.get('doctype') is None:
       field_parsed = fieldtype + ' ' + fieldname + ';\n'
+    else:
+      field_parsed = child_doc_type.replace('{{child_doctype}}',
+                                            field.get('doctype').replace(' ', '')) + ' ' + fieldname + ';\n'
 
   return field_parsed
 
