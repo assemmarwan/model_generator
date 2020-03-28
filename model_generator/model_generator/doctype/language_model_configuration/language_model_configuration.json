@@ -8,6 +8,7 @@
  "field_order": [
   "title",
   "default_type",
+  "templates_section",
   "to_camel_case",
   "decorator",
   "child_doc_type",
@@ -87,9 +88,14 @@
    "fieldtype": "Code",
    "label": "Type And Variable template",
    "reqd": 1
+  },
+  {
+   "fieldname": "templates_section",
+   "fieldtype": "Section Break",
+   "label": "Templates"
   }
  ],
- "modified": "2020-03-28 04:12:07.501548",
+ "modified": "2020-03-28 04:20:19.467174",
  "modified_by": "Administrator",
  "module": "Model Generator",
  "name": "Language Model Configuration",
