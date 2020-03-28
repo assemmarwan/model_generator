@@ -115,5 +115,122 @@
   "title": "Dart",
   "to_camel_case": 1,
   "type_and_variable_template": "{{fieldtype}} {{fieldname}};"
+ },
+ {
+  "child_doc_type": "Array&lt;{{child_doctype}}&gt;",
+  "data_type_map": [
+   {
+    "data_type": "string",
+    "field_type": "Data",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "string",
+    "field_type": "Select",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Check",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "string",
+    "field_type": "Link",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Dynamic Link",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Int",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Float",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Currency",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "string",
+    "field_type": "Attach Image",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Attach",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Code",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "string",
+    "field_type": "Date",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "string",
+    "field_type": "Small Text",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   },
+   {
+    "data_type": "number",
+    "field_type": "Rating",
+    "parent": "TS/JS",
+    "parentfield": "data_type_map",
+    "parenttype": "Language Model Configuration"
+   }
+  ],
+  "decorator": "@JsonKey(name:\"{{fieldname}}\")",
+  "default_type": "string",
+  "docstatus": 0,
+  "doctype": "Language Model Configuration",
+  "modified": "2020-03-28 04:16:08.457968",
+  "name": "TS/JS",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "signature_end": "}",
+  "signature_start": "export interface {{doctype}} {",
+  "title": "TS/JS",
+  "to_camel_case": 0,
+  "type_and_variable_template": "{{fieldname}}:{{fieldtype}};"
  }
 ]
