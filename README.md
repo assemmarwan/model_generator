@@ -10,8 +10,13 @@ Since it's repetitive and somewhat an annoying task, I saw an oppurtunity to som
 
 ### Doctypes included
 
-- Language Model Configuration
 - Model Generator
+- Language Model Configuration
+
+
+#### Model Generator Demo
+
+![Demo](demo.gif)
 
 #### Language Model Configuration
 
