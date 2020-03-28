@@ -105,7 +105,7 @@
   "default_type": "String",
   "docstatus": 0,
   "doctype": "Language Model Configuration",
-  "modified": "2020-03-26 04:10:57.344692",
+  "modified": "2020-03-28 04:06:09.821931",
   "name": "Dart",
   "parent": null,
   "parentfield": null,
@@ -113,6 +113,7 @@
   "signature_end": "}",
   "signature_start": "class {{doctype}} {",
   "title": "Dart",
-  "to_camel_case": 1
+  "to_camel_case": 1,
+  "type_and_variable_template": "{{fieldtype}} {{fieldname}};"
  }
 ]

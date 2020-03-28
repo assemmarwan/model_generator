@@ -2,6 +2,12 @@ import json
 
 import frappe
 
+# Constants used in the Language Model Configuration
+FIELD_TYPE = '{{fieldtype}}'
+FIELD_NAME = '{{fieldname}}'
+CHILD_DOCTYPE = '{{child_doctype}}'
+DOCTYPE = '{{doctype}}'
+
 
 @frappe.whitelist(allow_guest=True)
 def generate_model(fields, lang_config) -> str:
@@ -44,32 +50,50 @@ def create_model(doctype: str, fields: list, language_config: dict) -> str:
 
 
 def begin_file(doctype: str, header: str) -> str:
-  return header.replace('{{doctype}}', doctype.replace(' ', ''))
+  return header.replace(DOCTYPE, doctype.replace(' ', ''))
 
 
 def parse_field_with_type(field: dict, lang_config: dict) -> str:
   _fieldtype = field.get('fieldtype')
   fieldtype = get_type_from_lang_config(_fieldtype, lang_config)
   fieldname = field.get('fieldname')
-  child_doc_type: str = lang_config.get('child_doc_type')
+  child_doc_type: str = lang_config.get('child_doc_type') or ''
 
   if lang_config.get('to_camel_case'):
-    decorator: str = lang_config.get('decorator')
-    field_parsed = decorator.replace('{{fieldname}}', fieldname) + '\n'
-    if field.get('doctype') is None:
-      field_parsed += fieldtype + ' ' + snake_to_camel(fieldname) + ';\n'
-    else:
-      field_parsed += child_doc_type.replace('{{child_doctype}}',
-                                             field.get('doctype').replace(' ', '')) + ' ' + snake_to_camel(
-          fieldname) + ';\n'
+    decorator: str = lang_config.get('decorator') or ''
+    field_parsed = decorator.replace(FIELD_NAME, fieldname) + '\n'
+
+    field_parsed += apply_variable_and_type_template(fieldname, fieldtype,
+                                                     lang_config.get('type_and_variable_template'),
+                                                     True,
+                                                     field.get('doctype'), child_doc_type)
   else:
-    if field.get('doctype') is None:
-      field_parsed = fieldtype + ' ' + fieldname + ';\n'
-    else:
-      field_parsed = child_doc_type.replace('{{child_doctype}}',
-                                            field.get('doctype').replace(' ', '')) + ' ' + fieldname + ';\n'
+    field_parsed = apply_variable_and_type_template(fieldname, fieldtype,
+                                                    lang_config.get('type_and_variable_template'),
+                                                    False,
+                                                    field.get('doctype'), child_doc_type)
 
   return field_parsed
+
+
+def apply_variable_and_type_template(fieldname: str, fieldtype: str, template: str, is_snake_to_camel=False,
+                                     child_doctype=None, child_doc_template=None):
+  if is_snake_to_camel:
+    if child_doctype:
+      print(child_doc_template)
+      _fieldtype = child_doc_template.replace(CHILD_DOCTYPE, child_doctype.replace(' ', ''))
+      print(_fieldtype)
+      return template.replace(FIELD_TYPE, _fieldtype).replace(FIELD_NAME, snake_to_camel(fieldname))
+    else:
+      return template.replace(FIELD_TYPE, fieldtype).replace(FIELD_NAME, snake_to_camel(fieldname))
+  else:
+    if child_doctype:
+
+      _fieldtype = child_doc_template.replace(CHILD_DOCTYPE, child_doctype.replace(' ', ''))
+
+      return template.replace(FIELD_TYPE, _fieldtype).replace(FIELD_NAME, fieldname)
+    else:
+      return template.replace(FIELD_TYPE, fieldtype).replace(FIELD_NAME, fieldname)
 
 
 def get_type_from_lang_config(field_type: str, lang_config: dict) -> str:
