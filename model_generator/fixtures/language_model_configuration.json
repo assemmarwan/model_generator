@@ -1,6 +1,6 @@
 [
  {
-  "child_doc_type": "List&lt;{{child_doctype}}&gt;",
+  "child_doctype_template": "List&lt;{{child_doctype}}&gt;",
   "data_type_map": [
    {
     "data_type": "String",
@@ -105,7 +105,7 @@
   "default_type": "String",
   "docstatus": 0,
   "doctype": "Language Model Configuration",
-  "modified": "2020-03-28 04:06:09.821931",
+  "modified": "2020-03-28 05:33:06.759739",
   "name": "Dart",
   "parent": null,
   "parentfield": null,
@@ -117,7 +117,7 @@
   "type_and_variable_template": "{{fieldtype}} {{fieldname}};"
  },
  {
-  "child_doc_type": "Array&lt;{{child_doctype}}&gt;",
+  "child_doctype_template": "Array&lt;{{child_doctype}}&gt;",
   "data_type_map": [
    {
     "data_type": "string",
@@ -218,11 +218,11 @@
     "parenttype": "Language Model Configuration"
    }
   ],
-  "decorator": "@JsonKey(name:\"{{fieldname}}\")",
+  "decorator": "",
   "default_type": "string",
   "docstatus": 0,
   "doctype": "Language Model Configuration",
-  "modified": "2020-03-28 04:16:08.457968",
+  "modified": "2020-03-28 05:32:55.805434",
   "name": "TS/JS",
   "parent": null,
   "parentfield": null,

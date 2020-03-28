@@ -57,7 +57,7 @@ def parse_field_with_type(field: dict, lang_config: dict) -> str:
   _fieldtype = field.get('fieldtype')
   fieldtype = get_type_from_lang_config(_fieldtype, lang_config)
   fieldname = field.get('fieldname')
-  child_doc_type: str = lang_config.get('child_doc_type') or ''
+  child_doctype_template: str = lang_config.get('child_doctype_template') or ''
 
   if lang_config.get('to_camel_case'):
     decorator: str = lang_config.get('decorator') or ''
@@ -66,12 +66,12 @@ def parse_field_with_type(field: dict, lang_config: dict) -> str:
     field_parsed += apply_variable_and_type_template(fieldname, fieldtype,
                                                      lang_config.get('type_and_variable_template'),
                                                      True,
-                                                     field.get('doctype'), child_doc_type)
+                                                     field.get('doctype'), child_doctype_template)
   else:
     field_parsed = apply_variable_and_type_template(fieldname, fieldtype,
                                                     lang_config.get('type_and_variable_template'),
                                                     False,
-                                                    field.get('doctype'), child_doc_type)
+                                                    field.get('doctype'), child_doctype_template)
 
   return field_parsed
 

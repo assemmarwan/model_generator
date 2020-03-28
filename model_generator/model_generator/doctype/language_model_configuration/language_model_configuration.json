@@ -11,7 +11,7 @@
   "templates_section",
   "to_camel_case",
   "decorator",
-  "child_doc_type",
+  "child_doctype_template",
   "type_and_variable_template",
   "column_break_5",
   "signature_start",
@@ -76,13 +76,6 @@
    "reqd": 1
   },
   {
-   "description": "The template to use if there's a child doctype. WARNING: Use HTML char encoding for &gt; and &lt;.",
-   "fieldname": "child_doc_type",
-   "fieldtype": "Code",
-   "label": "Child Doc Type",
-   "reqd": 1
-  },
-  {
    "description": "Set the template for variable type per language. For example in Dart: {{fieldtype}} {{fieldname}};\n\nIn JS, {{fieldname}}:{{fieldtype}};",
    "fieldname": "type_and_variable_template",
    "fieldtype": "Code",
@@ -93,9 +86,16 @@
    "fieldname": "templates_section",
    "fieldtype": "Section Break",
    "label": "Templates"
+  },
+  {
+   "description": "The template to use if there's a child doctype. WARNING: Use HTML char encoding for &gt; and &lt;.",
+   "fieldname": "child_doctype_template",
+   "fieldtype": "Code",
+   "label": "Child Doctype Template",
+   "reqd": 1
   }
  ],
- "modified": "2020-03-28 04:20:19.467174",
+ "modified": "2020-03-28 05:31:18.397316",
  "modified_by": "Administrator",
  "module": "Model Generator",
  "name": "Language Model Configuration",
