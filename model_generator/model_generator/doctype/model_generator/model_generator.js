@@ -93,8 +93,6 @@ const get_doctypes = parentdt => [{doctype: parentdt}].concat(
 const add_doctype_field_multicheck_control = (doctype, parent_wrapper, field = '') => {
     const fields = get_fields(doctype);
 
-    console.log(fields);
-
     const options = fields
         .map(df => {
             return {
@@ -134,7 +132,6 @@ const generate_doc = frm => {
         }
         // Table doctype
         else {
-            key = dt + ':' + frm.fields_multicheck[dt].df.fieldname;
             let temp = columns[doctype];
             temp.push({
                 doctype: dt,
@@ -145,13 +142,17 @@ const generate_doc = frm => {
         }
     });
     console.log(columns);
-    frappe.call('model_generator.api.generate_model', {fields: columns, lang_config: frm.doc.language_config})
+    frappe.call('model_generator.api.generate_model', {
+        fields: columns,
+        lang_config: frm.doc.language_config,
+        include_std_fields: frm.doc.include_standard_fields && frm.doc.include_standard_fields !== '' ? 1 : 0
+    })
         .then(result => frappe.msgprint(result, 'Successful Generation'));
 };
 
 /**
  * Converts the columns selected into a predefined schema.
- * This is to standarize the schema if the API will be used to generate models.
+ * This is to standardize the schema if the API will be used to generate models.
  * Example:
  *
  * {

@@ -1,16 +1,33 @@
 import json
 
 import frappe
+from frappe.utils import cint
 
 # Constants used in the Language Model Configuration
 FIELD_TYPE = '{{fieldtype}}'
 FIELD_NAME = '{{fieldname}}'
 CHILD_DOCTYPE = '{{child_doctype}}'
 DOCTYPE = '{{doctype}}'
+STD_FIELDS = [
+    {'fieldname': 'name', 'fieldtype': 'Link'},
+    {'fieldname': 'owner', 'fieldtype': 'Link'},
+    {'fieldname': 'idx', 'fieldtype': 'Int'},
+    {'fieldname': 'creation', 'fieldtype': 'Date'},
+    {'fieldname': 'modified', 'fieldtype': 'Date'},
+    {'fieldname': 'modified_by', 'fieldtype': 'Data'},
+    {'fieldname': '_user_tags', 'fieldtype': 'Data'},
+    {'fieldname': '_liked_by', 'fieldtype': 'Data'},
+    {'fieldname': '_comments', 'fieldtype': 'Text'},
+    {'fieldname': '_assign', 'fieldtype': 'Text'},
+    {'fieldname': 'docstatus', 'fieldtype': 'Int'},
+    {'fieldname': 'parent', 'fieldtype': 'Data'},
+    {'fieldname': 'parenttype', 'fieldtype': 'Data'},
+    {'fieldname': 'parentfield', 'fieldtype': 'Data'}
+]
 
 
 @frappe.whitelist(allow_guest=True)
-def generate_model(fields, lang_config) -> str:
+def generate_model(fields, lang_config, include_std_fields=None) -> str:
   if frappe.model.db_exists('Language Model Configuration', lang_config):
     language_config = frappe.get_doc('Language Model Configuration', lang_config).as_dict()
   else:
@@ -27,8 +44,16 @@ def generate_model(fields, lang_config) -> str:
     frappe.throw('Doctype is not specified')
 
   fields: list = [field for field in fields_dict[doctype]]
-
   child_doctypes: list = [child_doctype for child_doctype in fields_dict[doctype] if child_doctype.get('doctype')]
+
+  if include_std_fields:
+    # Parse to int
+    if isinstance(include_std_fields, str):
+      include_std_fields = cint(include_std_fields)
+    if include_std_fields:
+      fields = STD_FIELDS + fields
+      for child_doctype in child_doctypes:
+        child_doctype['fields'] = STD_FIELDS + child_doctype['fields']
 
   model = create_model(doctype, fields, language_config)
   for child_doctype in child_doctypes:

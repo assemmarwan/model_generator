@@ -1,5 +1,4 @@
 {
- "actions": [],
  "creation": "2019-12-27 00:14:49.324624",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -8,6 +7,7 @@
   "reference_doctype",
   "column_break_2",
   "language_config",
+  "include_standard_fields",
   "reference_doctype_section",
   "fields_multicheck"
  ],
@@ -39,12 +39,18 @@
    "label": "Language Config",
    "options": "Language Model Configuration",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "description": "Whether to include all the implicit fields of a document like name, owner, modified, etc...",
+   "fieldname": "include_standard_fields",
+   "fieldtype": "Check",
+   "label": "Include Standard Fields"
   }
  ],
  "hide_toolbar": 1,
  "issingle": 1,
- "links": [],
- "modified": "2020-01-02 12:43:00.249912",
+ "modified": "2020-03-31 18:03:16.576179",
  "modified_by": "Administrator",
  "module": "Model Generator",
  "name": "Model Generator",

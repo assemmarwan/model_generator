@@ -6,7 +6,7 @@ Generate models to different languages based on Doctype.
 
 During development, the doctypes are defined usually by the backend team. Front-end development teams will require to write the models for these doctypes in the front-end as models which usually counts much as manual and repetitive task.
 
-Since it's repetitive and somewhat an annoying task, I saw an oppurtunity to some extent automate this task with some minor configurations in the doctype and refactoring in the frontend which will hopefully reduce the time wasted achieving this task.
+Since it's repetitive and somewhat an annoying task, I saw an opportunity to some extent automate this task with some minor configurations in the doctype and refactoring in the frontend which will hopefully reduce the time wasted achieving this task.
 
 ### Doctypes included
 
@@ -54,6 +54,7 @@ In addition to utilizing this app through Frappé UI, it can also be utilized us
 {
   "cmd": "model_generator.api.generate_model",
   "lang_config": "Dart",
+  "include_std_fields": 0,
   "fields": {
     "User": [
       {
