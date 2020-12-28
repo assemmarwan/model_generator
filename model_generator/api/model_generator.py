@@ -28,7 +28,7 @@ STD_FIELDS = [
 
 @frappe.whitelist(allow_guest=True)
 def generate_model(fields, lang_config, include_std_fields=None) -> str:
-  if frappe.model.db_exists('Language Model Configuration', lang_config):
+  if frappe.db.exists('Language Model Configuration', lang_config):
     language_config = frappe.get_doc('Language Model Configuration', lang_config).as_dict()
   else:
     frappe.throw('Language Model Configuration: {0} does not exist'.format(lang_config))
